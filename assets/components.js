@@ -1,5 +1,7 @@
 const SITE = {
-  email: 'YOUR_EMAIL_HERE',
-  linkedin: 'YOUR_LINKEDIN_URL_HERE',
-  github: 'https://github.com/tnpthanh2400'
+  email: 'tnpthanh.work@gmail.com',
+  linkedin: 'https://www.linkedin.com/in/thanhtran-me',
+  github: 'https://github.com/tnpthanh2400',
+  resume: 'assets/Thanh-Tran-Resume-Aug-2026.pdf',
+  location: 'Chandler, Arizona'
 };

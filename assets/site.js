@@ -1,11 +1,41 @@
 (() => {
+  const root = document.documentElement;
+  const body = document.body;
+
+  // Pointer spotlight — subtle and disabled on coarse pointers via CSS behavior.
+  window.addEventListener('pointermove', (e) => {
+    root.style.setProperty('--mx', `${e.clientX}px`);
+    root.style.setProperty('--my', `${e.clientY}px`);
+  }, { passive: true });
+
+  // Scroll progress.
+  const progress = document.querySelector('.scroll-progress');
+  const updateProgress = () => {
+    if (!progress) return;
+    const max = document.documentElement.scrollHeight - window.innerHeight;
+    const pct = max > 0 ? (window.scrollY / max) * 100 : 0;
+    progress.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+  };
+  updateProgress();
+  window.addEventListener('scroll', updateProgress, { passive: true });
+  window.addEventListener('resize', updateProgress);
+
+  // Mobile menu.
   const menuBtn = document.querySelector('.menu-btn');
   const navLinks = document.querySelector('.nav-links');
   if (menuBtn && navLinks) {
-    menuBtn.addEventListener('click', () => navLinks.classList.toggle('open'));
-    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+    menuBtn.setAttribute('aria-expanded', 'false');
+    menuBtn.addEventListener('click', () => {
+      const open = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(open));
+    });
+    navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+      navLinks.classList.remove('open');
+      menuBtn.setAttribute('aria-expanded', 'false');
+    }));
   }
 
+  // Scroll reveal.
   const reveal = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -13,9 +43,10 @@
         reveal.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12 });
-  document.querySelectorAll('.reveal').forEach(el => reveal.observe(el));
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => reveal.observe(el));
 
+  // Count-up metrics with separators.
   const counters = document.querySelectorAll('[data-count]');
   const countObs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -26,20 +57,25 @@
       const suffix = el.dataset.suffix || '';
       const decimals = Number(el.dataset.decimals || 0);
       const start = performance.now();
-      const duration = 1100;
+      const duration = 1150;
       const frame = (now) => {
         const p = Math.min((now - start) / duration, 1);
         const eased = 1 - Math.pow(1 - p, 3);
         const value = target * eased;
-        el.textContent = prefix + value.toFixed(decimals) + suffix;
+        const formatted = Number(value.toFixed(decimals)).toLocaleString(undefined, {
+          minimumFractionDigits: decimals,
+          maximumFractionDigits: decimals
+        });
+        el.textContent = prefix + formatted + suffix;
         if (p < 1) requestAnimationFrame(frame);
       };
       requestAnimationFrame(frame);
       countObs.unobserve(el);
     });
-  }, { threshold: .4 });
+  }, { threshold: .35 });
   counters.forEach(el => countObs.observe(el));
 
+  // Work filters.
   const filterBtns = document.querySelectorAll('.filter-btn');
   const workCards = document.querySelectorAll('.work-card[data-category]');
   filterBtns.forEach(btn => {
@@ -49,11 +85,13 @@
       const filter = btn.dataset.filter;
       workCards.forEach(card => {
         const categories = card.dataset.category.split(' ');
-        card.classList.toggle('hide', filter !== 'all' && !categories.includes(filter));
+        const hide = filter !== 'all' && !categories.includes(filter);
+        card.classList.toggle('hide', hide);
       });
     });
   });
 
+  // Interactive funnel diagnostic.
   const diagData = {
     reach: {
       type: 'Audience / Message',
@@ -70,8 +108,8 @@
     stall: {
       type: 'Buying stage / Sales process',
       title: 'Opportunity or pipeline stalls',
-      copy: 'I would look for buying-stage friction, missing stakeholder coverage, weak signal handoff, or a mismatch between marketing treatment and the active sales process.',
-      checks: ['Stage movement', 'Stakeholders', 'Signal visibility', 'Sales process']
+      copy: 'I would look for buying-stage friction, missing stakeholder coverage, weak signal handoff, or a mismatch between marketing treatment and the active Sales process.',
+      checks: ['Stage movement', 'Stakeholder coverage', 'Signal visibility', 'Sales process']
     },
     scale: {
       type: 'Investment / Scale',
@@ -99,5 +137,93 @@
     renderDiag('reach');
   }
 
+  // Tech stack explorer. Every tool below is supported by the uploaded resume.
+  const stackData = {
+    revenue: {
+      label: 'Revenue + ABM',
+      title: 'Account intelligence where revenue teams work.',
+      copy: 'CRM, account intelligence and data tools I use to prioritize accounts, connect buying signals and support Sales activation.',
+      tools: ['Salesforce', 'Demandbase', '6sense', 'ZoomInfo']
+    },
+    automation: {
+      label: 'Automation',
+      title: 'Lifecycle, nurture and funnel operations.',
+      copy: 'Marketing automation platforms used for lifecycle programs, lead scoring, routing, qualification and campaign operations.',
+      tools: ['Marketo', 'HubSpot', 'Pardot', 'Salesforce Marketing Cloud']
+    },
+    paid: {
+      label: 'Paid Media',
+      title: 'From account advertising to performance demand.',
+      copy: 'Platforms used across paid search, paid social, programmatic, ABM advertising and social publishing.',
+      tools: ['DV360', 'Demandbase Ads', 'LinkedIn Ads', 'Google Ads', 'Instagram Ads', 'Facebook Ads', 'Hootsuite']
+    },
+    analytics: {
+      label: 'Analytics',
+      title: 'Measurement that leads to a decision.',
+      copy: 'Analytics, visualization and quantitative tools used to understand funnel performance, audience behavior and business outcomes.',
+      tools: ['Google Analytics 4', 'Tableau', 'Looker', 'Sisense', 'Clarity', 'Advanced Excel', 'SPSS', 'JMP']
+    },
+    web: {
+      label: 'Web + CMS',
+      title: 'Campaign experiences and web publishing.',
+      copy: 'Content management and web platforms I have worked with to support campaign experiences and digital execution.',
+      tools: ['WordPress', 'Webflow', 'Wix', 'Contentful']
+    },
+    workflow: {
+      label: 'Workflow',
+      title: 'Keeping execution moving across teams.',
+      copy: 'Project and workflow tools used to coordinate cross-functional execution, requests and delivery.',
+      tools: ['Monday.com', 'Trello', 'Notion', 'ServiceNow', 'Jira']
+    }
+  };
+  const stackTabs = document.querySelectorAll('.stack-tab[data-stack]');
+  const stackLabel = document.querySelector('[data-stack-label]');
+  const stackTitle = document.querySelector('[data-stack-title]');
+  const stackCopy = document.querySelector('[data-stack-copy]');
+  const toolCloud = document.querySelector('[data-tool-cloud]');
+  if (stackTabs.length && stackLabel && stackTitle && stackCopy && toolCloud) {
+    const renderStack = key => {
+      const data = stackData[key];
+      stackLabel.textContent = data.label;
+      stackTitle.textContent = data.title;
+      stackCopy.textContent = data.copy;
+      toolCloud.innerHTML = data.tools.map(tool => `<span class="tool-chip">${tool}</span>`).join('');
+    };
+    stackTabs.forEach(btn => btn.addEventListener('click', () => {
+      stackTabs.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderStack(btn.dataset.stack);
+    }));
+    renderStack('revenue');
+  }
+
+  // Pointer-reactive cards — subtle tilt + shine on fine pointers.
+  if (window.matchMedia('(pointer:fine)').matches) {
+    document.querySelectorAll('.case-card, .work-card').forEach(card => {
+      if (!card.querySelector('.card-shine')) {
+        const shine = document.createElement('span');
+        shine.className = 'card-shine';
+        card.appendChild(shine);
+      }
+      card.addEventListener('pointermove', e => {
+        const r = card.getBoundingClientRect();
+        const x = e.clientX - r.left;
+        const y = e.clientY - r.top;
+        const rx = ((y / r.height) - .5) * -3.5;
+        const ry = ((x / r.width) - .5) * 4.5;
+        card.style.setProperty('--cx', `${x}px`);
+        card.style.setProperty('--cy', `${y}px`);
+        card.style.transform = `translateY(-7px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+      });
+      card.addEventListener('pointerleave', () => {
+        card.style.transform = '';
+      });
+    });
+  }
+
+  // Current year.
   document.querySelectorAll('[data-year]').forEach(el => el.textContent = new Date().getFullYear());
+
+  // Add no-op loaded class for future page transitions.
+  requestAnimationFrame(() => body.classList.add('is-loaded'));
 })();
