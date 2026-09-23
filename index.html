@@ -1,449 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Thanh Tran | Growth Marketing, Demand Gen & ABM</title>
-
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #071316;
-      color: #f4f0e8;
-    }
-
-    nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      padding: 24px 7%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(7, 19, 22, 0.85);
-      backdrop-filter: blur(12px);
-      z-index: 100;
-    }
-
-    .logo {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 1px;
-    }
-
-    nav a {
-      color: #f4f0e8;
-      text-decoration: none;
-      margin-left: 30px;
-      font-size: 14px;
-    }
-
-    nav a:hover {
-      color: #33b8ad;
-    }
-
-    .hero {
-      min-height: 100vh;
-      display: flex;
-      align-items: center;
-      padding: 120px 7% 80px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .hero::after {
-      content: "";
-      position: absolute;
-      width: 650px;
-      height: 650px;
-      border-radius: 50%;
-      right: -100px;
-      top: 100px;
-      background:
-        radial-gradient(
-          circle,
-          rgba(51,184,173,.35) 0%,
-          rgba(14,119,116,.15) 35%,
-          transparent 70%
-        );
-      filter: blur(20px);
-    }
-
-    .hero-content {
-      max-width: 950px;
-      position: relative;
-      z-index: 2;
-    }
-
-    .eyebrow {
-      color: #33b8ad;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 14px;
-      margin-bottom: 25px;
-    }
-
-    h1 {
-      font-size: clamp(52px, 7vw, 105px);
-      line-height: .95;
-      font-weight: 500;
-      letter-spacing: -4px;
-      margin-bottom: 35px;
-    }
-
-    h1 span {
-      color: #33b8ad;
-    }
-
-    .hero-description {
-      max-width: 690px;
-      font-size: 21px;
-      line-height: 1.6;
-      color: #b8c6c5;
-      margin-bottom: 38px;
-    }
-
-    .buttons {
-      display: flex;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .button {
-      display: inline-block;
-      padding: 15px 25px;
-      border-radius: 50px;
-      text-decoration: none;
-      font-size: 15px;
-      transition: .3s;
-    }
-
-    .primary {
-      background: #33b8ad;
-      color: #061214;
-    }
-
-    .primary:hover {
-      transform: translateY(-3px);
-    }
-
-    .secondary {
-      border: 1px solid #53706e;
-      color: #f4f0e8;
-    }
-
-    section {
-      padding: 110px 7%;
-    }
-
-    .section-label {
-      color: #33b8ad;
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 13px;
-      margin-bottom: 18px;
-    }
-
-    h2 {
-      font-size: clamp(38px, 5vw, 65px);
-      font-weight: 500;
-      margin-bottom: 55px;
-    }
-
-    .metrics {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-    }
-
-    .metric {
-      padding: 35px;
-      background: #0c1d20;
-      border: 1px solid #173336;
-      border-radius: 15px;
-    }
-
-    .metric-number {
-      font-size: 42px;
-      color: #33b8ad;
-      margin-bottom: 10px;
-    }
-
-    .metric p {
-      color: #9daead;
-      line-height: 1.5;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 25px;
-    }
-
-    .project {
-      min-height: 330px;
-      border-radius: 20px;
-      padding: 40px;
-      background:
-        linear-gradient(
-          145deg,
-          #10272a,
-          #0a171a
-        );
-      border: 1px solid #194044;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-      transition: .3s;
-    }
-
-    .project:hover {
-      transform: translateY(-6px);
-      border-color: #33b8ad;
-    }
-
-    .project-type {
-      color: #33b8ad;
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      margin-bottom: 12px;
-    }
-
-    .project h3 {
-      font-size: 30px;
-      margin-bottom: 12px;
-    }
-
-    .project p {
-      color: #9daead;
-      line-height: 1.6;
-    }
-
-    footer {
-      padding: 60px 7%;
-      border-top: 1px solid #173336;
-      color: #7f9694;
-      display: flex;
-      justify-content: space-between;
-    }
-
-    @media (max-width: 800px) {
-      nav .links {
-        display: none;
-      }
-
-      h1 {
-        letter-spacing: -2px;
-      }
-
-      .metrics,
-      .projects {
-        grid-template-columns: 1fr;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 15px;
-      }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Thanh Tran — B2B growth marketing, demand generation and ABM portfolio.">
+  <title>Thanh Tran — Growth Marketing · Demand Gen · ABM</title>
+  <link rel="stylesheet" href="assets/style.css">
 </head>
-
 <body>
-
-  <nav>
-    <div class="logo">THANH TRAN</div>
-
-    <div class="links">
-      <a href="#impact">Impact</a>
-      <a href="#work">Selected Work</a>
-      <a href="#about">About</a>
-      <a href="mailto:your@email.com">Contact</a>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html"><span class="brand-mark"><span></span></span><span>THANH TRAN</span></a>
+    <button class="menu-btn" aria-label="Open navigation">☰</button>
+    <div class="nav-links">
+      <a class="active" href="index.html">Home</a>
+      <a href="work.html">Work</a>
+      <a href="approach.html">Approach</a>
+      <a href="about.html">About</a>
+      <a class="nav-cta" href="about.html#contact">Contact ↗</a>
     </div>
-  </nav>
+  </div>
+</nav>
 
-
-  <section class="hero">
-
-    <div class="hero-content">
-
-      <div class="eyebrow">
-        Growth Marketing · Demand Generation · ABM
+<main>
+  <section class="hero grid-bg">
+    <div class="container hero-layout">
+      <div class="reveal">
+        <div class="kicker">Demand Generation · Growth Marketing · ABM / ABX</div>
+        <h1>I build B2B growth systems that turn <span class="accent">market signals into pipeline.</span></h1>
+        <p class="lead">Strategy, integrated campaigns, paid media, lifecycle, account intelligence, Sales activation and revenue measurement — connected as one operating system, not isolated tactics.</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="work.html">Explore selected work →</a>
+          <a class="btn btn-secondary" href="approach.html">See how I think</a>
+        </div>
       </div>
+      <div class="hero-visual reveal" aria-label="Abstract data-to-pipeline visual">
+        <img src="assets/hero-network.png" alt="Abstract account signals converging into a pipeline">
+        <span class="signal-label">Intent</span>
+        <span class="signal-label">Engagement</span>
+        <span class="signal-label">Journey stage</span>
+        <span class="signal-label">Pipeline ↗</span>
+      </div>
+    </div>
+  </section>
 
-      <h1>
-        Building B2B<br>
-        growth from<br>
-        <span>signal to pipeline.</span>
-      </h1>
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div><div class="kicker">Growth I can point to</div><h2 class="section-title">Business impact, not just activity.</h2></div>
+        <p class="section-copy">The work behind the numbers: audience strategy → campaigns → signals → Sales → pipeline → optimization.</p>
+      </div>
+      <div class="metrics reveal">
+        <div class="metric"><strong data-count="18" data-prefix="$" data-suffix="M+">$18M+</strong><span>Influenced pipeline</span><small>Connected to integrated marketing programs</small></div>
+        <div class="metric"><strong data-count="15" data-prefix="+" data-suffix="%">+15%</strong><span>YoY pipeline</span><small>Year-over-year pipeline growth</small></div>
+        <div class="metric"><strong data-count="23" data-prefix="+" data-suffix="%">+23%</strong><span>Engagement</span><small>Account engagement lift</small></div>
+        <div class="metric"><strong data-count="7000" data-suffix="+">7,000+</strong><span>Accounts supported</span><small>ABM / growth framework scale</small></div>
+        <div class="metric"><strong data-count="28" data-suffix="+">28+</strong><span>Reactivation opportunities</span><small>From renewed buying signals</small></div>
+      </div>
+    </div>
+  </section>
 
-      <p class="hero-description">
-        I build integrated growth programs across account-based marketing,
-        demand generation, paid media, lifecycle marketing and sales
-        alignment — turning audience intelligence into measurable pipeline.
-      </p>
+  <section class="light-section">
+    <div class="container">
+      <div class="section-head reveal">
+        <div><div class="kicker">How I think about growth</div><h2 class="section-title">Growth is a system.</h2></div>
+        <p class="section-copy">Demand generation creates and captures demand. Growth diagnoses, experiments and scales. ABM prioritizes, personalizes and coordinates Sales around the right accounts.</p>
+      </div>
+      <div class="system-grid reveal">
+        <div class="system-card"><b>01</b><h3>Market → audience</h3><p>Start with ICP, market opportunity, account potential, behavior, journey and history.</p></div>
+        <div class="system-card"><b>02</b><h3>Audience → activation</h3><p>Translate business context into coordinated paid, lifecycle, web, retargeting and Sales touchpoints.</p></div>
+        <div class="system-card"><b>03</b><h3>Signals → action</h3><p>Make intent, engagement and journey signals visible where the revenue team actually works.</p></div>
+        <div class="system-card"><b>04</b><h3>Pipeline → learning</h3><p>Use opportunity and performance data to improve targeting, messaging, investment and the next experiment.</p></div>
+      </div>
+    </div>
+  </section>
 
-      <div class="buttons">
-        <a href="#work" class="button primary">
-          Explore My Work
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <div><div class="kicker">Selected work</div><h2 class="section-title">Strategy → execution → impact.</h2></div>
+        <a class="btn btn-secondary" href="work.html">View all work →</a>
+      </div>
+      <div class="case-grid">
+        <a class="case-card featured reveal" href="case-revenue-engine.html">
+          <span class="case-arrow">↗</span><span class="case-glow"></span>
+          <div><div class="case-number">Case 01 · ABM / Revenue System</div><h3>Turning account intelligence into a measurable revenue motion.</h3><p>Demandbase + Salesforce + activation + Sales enablement — built to reduce the distance between a signal and the next useful action.</p></div>
+          <div class="case-tags"><span class="tag">$18M+ influenced pipeline</span><span class="tag">+15% YoY pipeline</span><span class="tag">7,000+ accounts</span></div>
         </a>
-
-        <a href="#about" class="button secondary">
-          About Me
+        <a class="case-card slim reveal" href="case-reactivation.html">
+          <span class="case-arrow">↗</span><span class="case-glow"></span>
+          <div><div class="case-number">Case 02 · Growth</div><h3>Finding growth where others might stop looking.</h3><p>Reactivated dormant and lost accounts when renewed intent and engagement signaled a return to market.</p></div>
+          <div class="case-tags"><span class="tag">28+ opportunities</span><span class="tag">Signal-based prioritization</span></div>
+        </a>
+        <a class="case-card slim reveal" href="case-demand-gen.html">
+          <span class="case-arrow">↗</span><span class="case-glow"></span>
+          <div><div class="case-number">Case 03 · Demand Generation</div><h3>One buying context. Multiple touchpoints.</h3><p>Built an integrated construction-account motion around one audience, one value proposition and one journey across paid, email, web and Sales.</p></div>
+          <div class="case-tags"><span class="tag">LinkedIn</span><span class="tag">Programmatic</span><span class="tag">Demandbase</span><span class="tag">Lifecycle</span></div>
+        </a>
+        <a class="case-card featured reveal" href="approach.html">
+          <span class="case-arrow">↗</span><span class="case-glow"></span>
+          <div><div class="case-number">Operating approach</div><h3>I don’t optimize metrics. I diagnose the funnel.</h3><p>Reach, engagement, progression, opportunity, pipeline and revenue each answer a different question. I use the pattern between them to decide what to change next.</p></div>
+          <div class="case-tags"><span class="tag">Define</span><span class="tag">Diagnose</span><span class="tag">Experiment</span><span class="tag">Scale</span></div>
         </a>
       </div>
-
     </div>
-
   </section>
 
-
-  <section id="impact">
-
-    <div class="section-label">
-      Selected Impact
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span><b>Strategy</b> · GTM · ICP · Segmentation · Journey design · Campaign architecture</span>
+      <span><b>Activation</b> · LinkedIn · Programmatic · Demandbase · Email / lifecycle · Retargeting</span>
+      <span><b>Infrastructure + data</b> · Salesforce · Marketing Cloud · CRM integration · Tableau · GA</span>
+      <span><b>Revenue</b> · Sales activation · Opportunity · Pipeline · Attribution · Optimization · Scale</span>
+      <span><b>Strategy</b> · GTM · ICP · Segmentation · Journey design · Campaign architecture</span>
+      <span><b>Activation</b> · LinkedIn · Programmatic · Demandbase · Email / lifecycle · Retargeting</span>
+      <span><b>Infrastructure + data</b> · Salesforce · Marketing Cloud · CRM integration · Tableau · GA</span>
+      <span><b>Revenue</b> · Sales activation · Opportunity · Pipeline · Attribution · Optimization · Scale</span>
     </div>
+  </div>
 
-    <h2>
-      Marketing that moves the business.
-    </h2>
-
-    <div class="metrics">
-
-      <div class="metric">
-        <div class="metric-number">$18M+</div>
-        <p>Influenced pipeline through integrated marketing programs.</p>
+  <section class="cta">
+    <div class="container">
+      <div class="cta-box reveal">
+        <div><div class="kicker">What I build</div><h2>Who. Why. When. How. <span style="color:var(--teal)">What happened next.</span></h2></div>
+        <a class="btn btn-primary" href="about.html">About my experience →</a>
       </div>
-
-      <div class="metric">
-        <div class="metric-number">+15%</div>
-        <p>Year-over-year pipeline growth.</p>
-      </div>
-
-      <div class="metric">
-        <div class="metric-number">7K+</div>
-        <p>Accounts activated through ABM frameworks.</p>
-      </div>
-
-      <div class="metric">
-        <div class="metric-number">+23%</div>
-        <p>Increase in account engagement.</p>
-      </div>
-
     </div>
-
   </section>
+</main>
 
-
-  <section id="work">
-
-    <div class="section-label">
-      Selected Work
-    </div>
-
-    <h2>
-      Strategy → execution → impact.
-    </h2>
-
-    <div class="projects">
-
-      <div class="project">
-        <div class="project-type">Account-Based Marketing</div>
-
-        <h3>
-          Building an Enterprise ABM Engine
-        </h3>
-
-        <p>
-          Turning intent, account intelligence and multi-channel activation
-          into coordinated sales and marketing plays.
-        </p>
-      </div>
-
-
-      <div class="project">
-        <div class="project-type">Demand Generation</div>
-
-        <h3>
-          From Campaigns to Pipeline
-        </h3>
-
-        <p>
-          Designing integrated demand programs across paid media,
-          email, content and sales activation.
-        </p>
-      </div>
-
-
-      <div class="project">
-        <div class="project-type">Growth Marketing</div>
-
-        <h3>
-          Finding Growth Through Experimentation
-        </h3>
-
-        <p>
-          Using audience insights, testing and performance data
-          to identify scalable growth opportunities.
-        </p>
-      </div>
-
-
-      <div class="project">
-        <div class="project-type">Marketing Operations</div>
-
-        <h3>
-          Connecting the Revenue Engine
-        </h3>
-
-        <p>
-          Building workflows across Demandbase, Salesforce,
-          Marketing Cloud and paid media platforms.
-        </p>
-      </div>
-
-    </div>
-
-  </section>
-
-
-  <section id="about">
-
-    <div class="section-label">
-      About
-    </div>
-
-    <h2>
-      I connect strategy, systems and execution.
-    </h2>
-
-    <p class="hero-description">
-      My work sits at the intersection of growth strategy, demand generation,
-      ABM, marketing technology and sales alignment. I focus on understanding
-      where growth can come from, building the system to capture it, and
-      measuring whether it actually creates business impact.
-    </p>
-
-  </section>
-
-
-  <footer>
-    <div>© 2026 Thanh Tran</div>
-    <div>Growth Marketing · Demand Generation · ABM</div>
-  </footer>
-
+<footer class="footer"><div class="container footer-inner"><span>© <span data-year></span> Thanh Tran</span><span>Demand Generation · Growth Marketing · ABM / ABX</span></div></footer>
+<script src="assets/site.js"></script>
 </body>
 </html>
